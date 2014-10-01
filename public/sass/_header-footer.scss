@@ -1,0 +1,43 @@
+
+header {
+	background-color: #EEE;
+	color: #FFF;
+	border-bottom: 1px solid #DDD;
+}
+
+header > .container {
+	padding: $-l 0;
+	@include smaller-than($max-width) {
+		padding: $-l $-m;
+	}
+	.logo {
+		font-size: 2em;
+		color: #444;
+	}
+}
+
+header .menu {
+	li {
+		display: inline-block;
+	}
+	.button {
+		margin-top: 0;
+	}
+}
+
+.header {
+	border-bottom: 1px solid #EEE;
+	padding: $-l 0;
+	h3, .buttons, .button {
+		display: inline-block;
+		margin: 0;
+	}
+	.buttons {
+		margin-top: $-xxs;
+		float: right;
+	}
+}
+
+footer {
+	min-height: 400px;
+}

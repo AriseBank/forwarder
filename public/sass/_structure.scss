@@ -1,0 +1,128 @@
+// HTML
+html {
+	//background-image: url('/images/background.jpg');
+	background-color: #FFF;
+	background-size: cover;
+	background-attachment: fixed;
+}
+body {
+	font-family: $text;
+	font-size: $fs-m;
+	color: #444;
+}
+.container {
+	@include center($max_width: $max-width );
+	@include smaller-than($max-width) {
+		padding: 0 $-m;
+	}
+}
+
+.margin-bottom {
+	margin-bottom: $-xxl;
+}
+
+* { 
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+img {
+	max-width: 100%;
+}
+
+a, p {
+	font-family: $text;
+	color: #444;
+	line-height: 1.4em;
+	margin: 0.5em 0 0.2em;
+}
+
+h1, h2, h3, h4 {
+	font-family: $text;
+    margin: 0.8em 0 0.2em;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #444;
+    &.spaced {
+    	margin: 0.8em 0 1em;
+    }
+}
+
+h1 {
+  margin-top: 0.2em;
+  font-size: 5.998em;
+}
+
+h2 {font-size: 2.827em;}
+
+h3 {font-size: 1.999em;}
+
+h4 {font-size: 1.414em;}
+
+small, .small {
+	font-size: 0.88em;
+}
+
+table {
+	font-family: $text;
+	line-height: 1.2em;
+	td , th{
+		padding: $-m $-m $-m $-m;
+		max-width: 500px;
+		text-align: left;
+	}
+	tr {
+		border-bottom: 1px solid #DDD;
+		&:hover {
+			color: #444;
+		}
+	}
+}
+
+input[type=text], input[type=password],input[type=number], input[type=date], textarea {
+	padding: $-xs $-s;
+	font-family: $text;
+	color: #444;
+	line-height: 1.4em;
+	border-radius: 4px;
+	background-color: #FFF;
+	border: 1px solid #BBB;
+}
+
+.half {
+	@include col(1/2);
+	min-width: $-xs;
+	@include smaller-than($m) {
+		@include stack();
+	}
+}
+
+.third {
+	@include col(1/3);
+	min-width: $-xs;
+	@include smaller-than($s) {
+		@include stack();
+	}
+}
+
+.center-inners {
+	text-align: center;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+	display: block;
+}
+
+.spacer {
+	margin-top: $-m;
+}
+.spacer-b {
+	margin-bottom: $-m;
+}

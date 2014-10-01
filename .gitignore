@@ -9,3 +9,4 @@ Thumbs.db
 /node_modules
 /public/dist
 /public/uploads/*
+app/config/database.php

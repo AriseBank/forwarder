@@ -22,7 +22,6 @@ Route::get('/set/{id}', array(
 	'as' => 'location.set'
 	));
 
-Route::post('/set', array('as'=>'location.update', 'uses'=>'LocationController@update'));
 Route::post('/set/{id}', array('as'=>'location.update', 'uses'=>'LocationController@update'));
 
 

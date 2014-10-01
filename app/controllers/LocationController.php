@@ -23,7 +23,7 @@ class LocationController extends BaseController {
 		if (is_null($this->location)) {
 			$location = new Location();
 			$location->id = $id;
-			$location->url = 'http:/www.google.com';
+			$location->url = 'http://www.google.com';
 			return $location;
 		}
 

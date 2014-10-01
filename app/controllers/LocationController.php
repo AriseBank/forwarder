@@ -21,7 +21,10 @@ class LocationController extends BaseController {
 		$this->location = $this->location->find($id);
 
 		if (is_null($this->location)) {
-			return Location::create(array('id' => $id, 'url' => 'http://www.google.com'));
+			$location = new Location();
+			$location->id = $id;
+			$location->url = 'http:/www.google.com';
+			return $location;
 		}
 
 		return $this->location;

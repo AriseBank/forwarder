@@ -1,25 +1,21 @@
-## Laravel PHP Framework
+## Forwader
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+The application allows simple forwarding of shorter URLs to specified longer URL's. A url can be set by going to `www.example.com/set/` which will be accessable at `www.example.com`. Multiple URL's can be set at once. For example setting a URL at `www.example.com/set/5` will be accessable via `www.exmaple.com/5`. This currently only works via numbers.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+## Requirements
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+* Server with PHP >= 5.4 and MCrypt PHP Extension
+* [Composer](https://getcomposer.org/)
+* [Node.JS](http://nodejs.org/)
+* [Gulp](http://gulpjs.com/)
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Installation
 
-## Official Documentation
+To install git clone the repo into a directory. Run `composer update` to install PHP dependancies. The SCSS also needs to be compiled. Run `npm install` then `gulp` to compile the SCSS into CSS.
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+The database details also need to be entered. Rename the file `app/config/database-default.php` file to `database.php` and change the options to your database set-up.
 
-### Contributing To Laravel
+## External Projects Used
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+* [Laravel](http://laravel.com/) - PHP Framework
+* [Jeet](http://jeet.gs/) - CSS Grid System

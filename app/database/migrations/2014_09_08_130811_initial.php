@@ -14,8 +14,8 @@ class Initial extends Migration {
 	{
 		Schema::create('locations', function($table)
 		{
-			$table->integer('id');
-			$table->primary('id');
+			$table->increments('id');
+			$table->string('uid', 50)->index();
 			$table->string('url', 300);
 			$table->timestamps();
 		});

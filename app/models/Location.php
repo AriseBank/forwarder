@@ -7,13 +7,13 @@ class Location extends BaseModel {
 
 	protected $fillable = 
 		[
-			'id',
+			'uid',
 			'url'
 		];
 
 	protected static $rules = 
 		[
-			'id' => 'required|integer',
+			'uid' => 'required|alpha_dash',
 			'url'	=>	'required|url'
 		];
 

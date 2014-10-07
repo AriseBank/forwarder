@@ -68,9 +68,6 @@
 		vertical-align: middle;
 		margin: 0 $-s 0 0;
 	}
-	.error {
-		color: red;
-	}
 	.group {
 		margin: $-l 0 $-s 0;
 		.current, button {
@@ -87,16 +84,19 @@
 	}
 }
 
-
-
 // Notifications
 .status {
 	display: inline-block;
 	color: $green;
+	opacity: 0;
 	margin-left: $-m;
 	i {
 		margin-right: $-xs;
 	}
+}
+
+.error {
+	color: red;
 }
 
 .subheader {

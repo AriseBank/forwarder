@@ -1,0 +1,20 @@
+
+
+<section class="header">
+	<div class="container">
+			<h3>Set URL Identified By '{{location.uid}}'</h3>
+			<p class="status" ng-class="statusClass" ng-show="status">
+				<i class="fa fa-thumbs-o-up"></i>
+				{{status}}
+			</p>
+	</div>
+</section>
+
+
+<section class="container url-form">
+	<form>
+		<input ng-model="location.url" type="text"> <button ng-click="save(location)" class="button pos">Save</button>
+	</form>
+	<p class="error" ng-show="error.url">{{error.url}}</p>
+	<p>URL can be accessed at <a target="_self" href="/{{location.uid}}">{{host + '/' + location.uid}}</a></p>
+</section>

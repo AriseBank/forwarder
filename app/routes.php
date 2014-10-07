@@ -27,6 +27,10 @@ Route::get('/set/{path}', function() {
 })->where('path', '.*');
 
 
+Route::get('/', array(
+	'uses' => 'LocationController@index',
+	'as'   => 'location.get'
+	));
 Route::get('{uid}', array(
 	'uses' => 'LocationController@index',
 	'as'   => 'location.get'

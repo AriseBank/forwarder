@@ -17,12 +17,18 @@
 			<tr>
 				<th>Identifier</th>
 				<th>URL</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="location in locations">
 				<td>{{location.uid}}</td>
 				<td>{{location.url}}</td>
+				<td>
+					<a ng-href="/set/{{location.uid}}" class="button">
+						<i class="fa fa-pencil"></i>Edit URL
+					</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>

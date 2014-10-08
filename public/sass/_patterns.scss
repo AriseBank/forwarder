@@ -52,7 +52,13 @@
 }
 
 // Forms
-
+.inline {
+	display: inline-block;
+	margin-left: $-m;
+	input, button {
+		vertical-align: middle;
+	}
+}
 .vertical {
 	label {
 		display: block;

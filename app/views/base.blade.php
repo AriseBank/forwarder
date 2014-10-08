@@ -19,6 +19,7 @@
 			<div class="logo left">Forwarder</div>
 			<div class="menu right">
 				<ul>
+					<li><a ng-href="/set" class="button"><i class="fa fa-chain"></i>Create Link</a></li>
 					<li><a class="button" ng-href="/recent"><i class="fa fa-clock-o"></i>Recent</a></li>
 				</ul>
 			</div>

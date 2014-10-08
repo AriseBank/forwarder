@@ -2,7 +2,16 @@
 
 <section class="header">
 	<div class="container">
-			<h3>Set URL Identified By '{{location.uid}}'</h3>
+			<h3>
+				<span ng-show="uidSet">Set URL Identified By '{{location.uid}}'</span>
+				<span ng-hide="uidSet">Enter a unique ID:</span>
+				<span ng-hide="uidSet">
+					<form class="inline">
+						<input ng-model="uidInput" type="text">
+						<button class="button pos" ng-click="setUid(uidInput)">Set UID</button>
+					</form>
+				</span>
+			</h3>
 			<p class="status" ng-class="statusClass" ng-show="status">
 				<i class="fa fa-thumbs-o-up"></i>
 				{{status}}
@@ -11,7 +20,7 @@
 </section>
 
 
-<section class="container url-form">
+<section ng-show="uidSet" class="container url-form">
 	<form>
 		<input ng-model="location.url" type="text"> <button ng-click="save(location)" class="button pos">Save</button>
 	</form>

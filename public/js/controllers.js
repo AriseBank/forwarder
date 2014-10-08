@@ -1,8 +1,8 @@
 
 var controllers = angular.module('controllers', []);
 
-controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams',
-	function($scope, $http, $routeParams) {
+controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams', '$location',
+	function($scope, $http, $routeParams, $location) {
 		// Initialize Location
 		$scope.location = {};
 		$scope.error = {};
@@ -10,8 +10,10 @@ controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams',
 
 		if ($routeParams.uid) {
 			$scope.location.uid = $routeParams.uid;
+			$scope.uidSet = true;
 		} else {
-			$scope.location.uid = 0;
+			$scope.uidSet = false;
+			//$scope.location.uid = 0;
 		};
 
 		$scope.getLocation = function(uid) {
@@ -35,8 +37,14 @@ controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams',
 				console.log(data);
 				if (data.url) {
 					$scope.error.url = data.url[0];
+				} else if (data.uid) {
+					$scope.error.url = data.uid[0];
 				};
 			});
+		}
+
+		$scope.setUid = function(uid) {
+			$location.path('/set/' + uid);
 		}
 
 	}]);

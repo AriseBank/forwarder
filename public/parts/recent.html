@@ -1,0 +1,29 @@
+
+
+<section class="header">
+	<div class="container">
+			<h3>Recent Items</h3>
+			<p class="status" ng-class="statusClass" ng-show="status">
+				<i class="fa fa-thumbs-o-up"></i>
+				{{status}}
+			</p>
+	</div>
+</section>
+
+
+<section class="container url-form">
+	<table class="neat">
+		<thead>
+			<tr>
+				<th>Identifier</th>
+				<th>URL</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="location in locations">
+				<td>{{location.uid}}</td>
+				<td>{{location.url}}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

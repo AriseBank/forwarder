@@ -40,3 +40,19 @@ controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams',
 		}
 
 	}]);
+
+controllers.controller('RecentCtrl', ['$scope', '$http', '$routeParams',
+	function($scope, $http, $routeParams) {
+
+		$scope.getLocations = function() {
+			$http.get('/api/recent')
+			.success(function(data) {
+				$scope.locations = data;
+			}).error(function(data) {
+				console.log(data);
+			});
+		}
+		$scope.getLocations();
+
+
+	}]);

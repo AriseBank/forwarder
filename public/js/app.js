@@ -11,6 +11,9 @@ forwarder.config(['$routeProvider', '$locationProvider',
 			}).when('/set', {
 				templateUrl: '/parts/set.html',
 				controller: 'SetCtrl'
+			}).when('/recent', {
+				templateUrl: '/parts/recent.html',
+				controller: 'RecentCtrl'
 			});
 
 		$locationProvider.html5Mode(true);

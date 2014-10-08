@@ -14,12 +14,16 @@
 // API Routes
 Route::get('/api/get/{uid}', 'LocationController@getLocation');
 Route::get('/api/get', 'LocationController@getLocation');
+Route::get('/api/recent', 'LocationController@getRecent');
 
 Route::post('/api/set/{uid}', array('as'=>'location.update', 'uses'=>'LocationController@update'));
 
 
 // Catch all for angular
 Route::get('/set', function() {
+	return View::make('base');
+});
+Route::get('/recent', function() {
 	return View::make('base');
 });
 Route::get('/set/{path}', function() {

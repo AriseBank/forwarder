@@ -44,5 +44,10 @@ class LocationController extends BaseController {
 		return array('message' => 'URL Saved');
 	}
 
+	public function getRecent()
+	{
+		return DB::table('locations')->orderBy('updated_at', 'desc')->take(10)->get();
+	}
+
 
 }

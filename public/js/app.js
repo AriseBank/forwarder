@@ -6,13 +6,13 @@ forwarder.config(['$routeProvider', '$locationProvider',
 		
 		$routeProvider.
 			when('/set/:uid', {
-				templateUrl: '/parts/set.html',
+				templateUrl: '/static/parts/set.html',
 				controller: 'SetCtrl'
 			}).when('/set', {
-				templateUrl: '/parts/set.html',
+				templateUrl: '/static/parts/set.html',
 				controller: 'SetCtrl'
 			}).when('/recent', {
-				templateUrl: '/parts/recent.html',
+				templateUrl: '/static/parts/recent.html',
 				controller: 'RecentCtrl'
 			});
 

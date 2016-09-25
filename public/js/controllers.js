@@ -53,7 +53,7 @@ controllers.controller('RecentCtrl', ['$scope', '$http', '$routeParams',
 	function($scope, $http, $routeParams) {
 
 		$scope.getLocations = function() {
-			$http.get('/api/recent')
+			$http.get('/api/recents')
 			.success(function(data) {
 				$scope.locations = data;
 			}).error(function(data) {

@@ -1,0 +1,56 @@
+
+.input-base {
+  background-color: #FFF;
+  border-radius: 4px;
+  border: 1px solid #BBB;
+  border-top: 1px solid #AAA;
+  display: inline-block;
+  font-size: $fs-m;
+  font-family: $text;
+  padding: $-s;
+  color: #444;
+  width: 280px;
+  max-width: 100%;
+  -webkit-appearance:none;
+  &.neg, &.invalid {
+    border: 1px solid $negative;
+  }
+  &.pos, &.valid {
+    border: 1px solid $positive;
+  }
+  &:focus {
+    outline: 1px solid $primary;
+  }
+  &.disabled, &[disabled] {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAMUlEQVQIW2NkwAGuXbv2nxGbHEhCS0uLEUMSJgHShCKJLIEiiS4Bl8QmAZbEJQGSBAC62BuJ+tt7zgAAAABJRU5ErkJggg==);
+  }
+}
+
+form button.button {
+  margin-left: $-m;
+  padding: $-s $-m;
+  min-width: 120px;
+}
+
+label {
+  display: block;
+  line-height: 1.4em;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #333;
+}
+
+label.radio, label.checkbox {
+  font-weight: 400;
+  input[type="radio"], input[type="checkbox"] {
+    margin-right: $-xs;
+  }
+}
+
+input[type="text"], input[type="number"], input[type="email"], input[type="search"], input[type="url"], input[type="password"], select, textarea {
+  @extend .input-base;
+}
+
+.form-group {
+  margin-bottom: $-s;
+}

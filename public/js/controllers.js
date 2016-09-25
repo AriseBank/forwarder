@@ -1,19 +1,21 @@
 
 var controllers = angular.module('controllers', []);
 
-controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams', '$location',
-	function($scope, $http, $routeParams, $location) {
+controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams', '$location' ,'$timeout',
+	function($scope, $http, $routeParams, $location, $timeout) {
 		// Initialize Location
-		$scope.location = {};
+		$scope.location = {
+			uid: ''
+		};
 		$scope.error = {};
 		$scope.host = window.location.host;
+		$scope.uidInput = '';
 
 		if ($routeParams.uid) {
 			$scope.location.uid = $routeParams.uid;
 			$scope.uidSet = true;
 		} else {
 			$scope.uidSet = false;
-			//$scope.location.uid = 0;
 		};
 
 		$scope.getLocation = function(uid) {
@@ -24,15 +26,21 @@ controllers.controller('SetCtrl', ['$scope', '$http', '$routeParams', '$location
 				console.log(data);
 			});
 		}
-		$scope.getLocation($scope.location.uid);
+
+		if ($scope.uidSet) {
+			$scope.getLocation($scope.location.uid);
+		}
 
 		$scope.save = function(location) {
 			$scope.statusClass = '';
-			$http.post('/api/set/' + location.uid, location)
+			$http.post('/api/set', location)
 			.success(function(data) {
-				$scope.status = data.message;
-				$scope.statusClass = 'fadeOut';
+				$scope.status = 'Link Updated';
+				$scope.statusClass = true;
 				$scope.error = {};
+				$timeout(function() {
+					$scope.statusClass = false;
+				}, 1500);
 			}).error(function(data) {
 				console.log(data);
 				if (data.url) {

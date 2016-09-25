@@ -1,0 +1,71 @@
+@import "reset";
+@import "variables";
+@import "mixins";
+@import "html";
+@import "text";
+@import "grid";
+@import "blocks";
+@import "buttons";
+@import "forms";
+
+header {
+	padding: $-xl 0;
+	background-color: $primary;
+	.logo {
+		color: #FFF;
+		font-size: 1.88em;
+		font-weight: 300;
+		margin: $-s 0;
+	}
+}
+
+table.table {
+	width: 100%;
+	table-layout: fixed;
+	th, td {
+		padding: $-xs $-s;
+		border: 1px solid lighten($primary, 30%);
+	}
+	th {
+		font-weight: bold;
+		text-align: left;
+		background-color: $primary;
+		color: #FFF;
+	}
+	td .overflow {
+		overflow: auto;
+	}
+}
+
+
+.notification {
+	background-color: #333;
+	color: #FFF;
+	display: inline-block;
+	padding: $-xl;
+	border-radius: 4px;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+	position: relative;
+	position: fixed;
+	width: 340px;
+	left: 50%;
+	margin-left: -170px;
+	pointer-events: none;
+	bottom: -120px;
+	transition: all ease-in-out 180ms;
+	i {
+		color: $positive;
+		position: absolute;
+		top: $-l;
+		font-size: 2em;
+	}
+	p {
+		margin: 0;
+		margin-top: -3px;
+		padding-left: $-xl*2;
+		max-width: 480px;
+	}
+	&.showing {
+		bottom: 20px;
+	}
+}

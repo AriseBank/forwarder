@@ -2,7 +2,7 @@
 
 <section class="header">
 	<div class="container">
-			<h3>Recent Items</h3>
+			<h2>Recent Items</h2>
 			<p class="status" ng-class="statusClass" ng-show="status">
 				<i class="fa fa-thumbs-o-up"></i>
 				{{status}}
@@ -12,18 +12,20 @@
 
 
 <section class="container url-form">
-	<table class="neat">
+	<table class="table">
 		<thead>
 			<tr>
-				<th>Identifier</th>
-				<th>URL</th>
-				<th>Actions</th>
+				<th width="20%">Identifier</th>
+				<th width="60%">URL</th>
+				<th width="20%">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="location in locations">
 				<td>{{location.uid}}</td>
-				<td>{{location.url}}</td>
+				<td><div class="overflow">
+					{{location.url}}
+				</div></td>
 				<td>
 					<a ng-href="/set/{{location.uid}}" class="button">
 						<i class="fa fa-pencil"></i>Edit URL

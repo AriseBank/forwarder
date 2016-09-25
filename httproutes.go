@@ -2,18 +2,24 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/GeertJohan/go.rice"
 	"github.com/gorilla/mux"
 	"net/http"
 )
 
 func registerRoutes(router *mux.Router, store *ForwardStore) {
 	// Serve static files from public folder
-	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("public"))))
+	box := rice.MustFindBox("public")
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(box.HTTPBox())))
+
+	// Routes where the index files just needs to be show.
+	// Angular will sort the logic on the front end.
 	router.PathPrefix("/set").HandlerFunc(httpServeIndex)
+	router.PathPrefix("/recent").HandlerFunc(httpServeIndex)
 
 	// API router
 	router.HandleFunc("/api/get/{uid}", httpGetForward(store)).Methods("Get")
-	router.HandleFunc("/api/set/{uid}", httpSetForward(store)).Methods("Post")
+	router.HandleFunc("/api/set", httpSetForward(store)).Methods("Post")
 	router.HandleFunc("/api/recents", httpGetRecents(store)).Methods("Get")
 
 	// Redirect on forwarder access
@@ -53,7 +59,6 @@ func httpGetRecents(store *ForwardStore) func(w http.ResponseWriter, r *http.Req
 // Endpoint for creating and setting forwards
 func httpSetForward(store *ForwardStore) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		key := mux.Vars(r)["uid"]
 		f := &Forward{}
 
 		if r.Body == nil {
@@ -64,11 +69,6 @@ func httpSetForward(store *ForwardStore) func(w http.ResponseWriter, r *http.Req
 		err := json.NewDecoder(r.Body).Decode(f)
 		if err != nil {
 			http.Error(w, err.Error(), 500)
-			return
-		}
-
-		if key != f.UID {
-			http.Error(w, "Incorrect Key Match", 500)
 			return
 		}
 

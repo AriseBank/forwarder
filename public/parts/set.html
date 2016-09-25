@@ -1,29 +1,33 @@
 
 
 <section class="header">
-	<div class="container">
-			<h3>
-				<span ng-show="uidSet">Set URL Identified By '{{location.uid}}'</span>
-				<span ng-hide="uidSet">Enter a unique ID:</span>
-				<span ng-hide="uidSet">
-					<form class="inline">
-						<input ng-model="uidInput" type="text">
-						<button class="button pos" ng-click="setUid(uidInput)">Set UID</button>
-					</form>
-				</span>
-			</h3>
-			<p class="status" ng-class="statusClass" ng-show="status">
-				<i class="fa fa-thumbs-o-up"></i>
-				{{status}}
-			</p>
+	<div class="container text-center">
+		<h2 ng-show="!uidSet">Enter a unique name</h2>
+
+		<h2 ng-show="uidSet" class="dual-header">Set link location</h2>
+		<h4 ng-show="uidSet">Identified by <span class="highlight">{{location.uid}}</span></h4>
+
+		<div ng-if="!uidSet">
+			<form class="inline" ng-submit="setUid(uidInput)">
+				<input focus ng-model="uidInput" tabindex="1" placeholder="Access name" type="text">
+				<button type="submit" class="button primary">Continue</button>
+			</form>
+		</div>
 	</div>
 </section>
 
 
-<section ng-show="uidSet" class="container url-form">
-	<form>
-		<input ng-model="location.url" type="text"> <button ng-click="save(location)" class="button pos">Save</button>
+<section ng-show="uidSet" class="container text-center url-form">
+	<form ng-submit="save(location)">
+		<input tabindex="1" ng-model="location.url" type="text">
+		<button type="submit" class="button primary">Save</button>
 	</form>
 	<p class="error" ng-show="error.url">{{error.url}}</p>
 	<p>URL can be accessed at <a target="_self" href="/{{location.uid}}">{{host + '/' + location.uid}}</a></p>
 </section>
+
+
+<div class="notification" ng-class="{showing: statusClass}">
+	<i class="fa fa-check-circle"></i>
+	<p>{{status}}</p>
+</div>

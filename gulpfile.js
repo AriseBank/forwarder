@@ -6,13 +6,13 @@ var sass = require('gulp-sass'),
 	uglify = require('gulp-uglify');
 
 gulp.task('css', function() {
-	return gulp.src('public/sass/*.scss')
+	return gulp.src('sass/*.scss')
 		.pipe(sass({
 			sourceComments: 'map',
 			errLogToConsole: true
 		}))
 		.pipe(autoprefixer('last 2 version', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-		//.pipe(minifyCss())
+		.pipe(minifyCss())
 		.pipe(gulp.dest('public/dist'));
 });
 
@@ -23,7 +23,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch('public/sass/*.scss', ['css']);
+	gulp.watch('sass/*.scss', ['css']);
 	//gulp.watch('public/js/*.js', ['scripts']);
 });
 

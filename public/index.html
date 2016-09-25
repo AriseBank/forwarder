@@ -2,17 +2,18 @@
 <html lang="en" ng-app="forwarder">
 <head>
 	<meta charset="UTF-8">
+	<base href="/">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 
 	<title>Forwarder</title>
 
 	<link rel="stylesheet" href="/static/dist/styles.css">
-	<link href='https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic' rel='stylesheet' type='text/css'>
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:300,300italic,400,500,700,400italic' rel='stylesheet' type='text/css'>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min.js"></script>
 
 	<script src="/static/js/app.js"></script>
 	<script src="/static/js/controllers.js"></script>
@@ -20,20 +21,15 @@
 <body>
 	<header>
 		<div class="container">
-			<div class="logo left">Forwarder</div>
-			<div class="menu right">
-				<ul>
-					<li><a ng-href="/set" class="button"><i class="fa fa-chain"></i>Create Link</a></li>
-					<li><a class="button" ng-href="/recent"><i class="fa fa-clock-o"></i>Recent</a></li>
-				</ul>
+			<div class="logo float left">Forwarder</div>
+			<div class="menu float right">
+				<a ng-href="/set" class="button"><i class="fa fa-chain"></i> New Link</a>
+				<a class="button" ng-href="/recent"><i class="fa fa-clock-o"></i> Recent</a>
 			</div>
 		</div>
 	</header>
 
 	<section ng-view></section>
 
-	<footer>
-		<div></div>
-	</footer>
 </body>
 </html>

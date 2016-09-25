@@ -1,12 +1,16 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
 )
 
 func main() {
+
+	portFlag := flag.Int("p", 8080, "Define the port to listen on")
+	flag.Parse()
 
 	// Create forward store and router
 	store := NewForwardStore()
@@ -16,8 +20,8 @@ func main() {
 	registerRoutes(router, store)
 
 	// Start server
-	fmt.Println("Listening on port 8080")
-	http.ListenAndServe(":8080", router)
+	fmt.Println(fmt.Sprintf("Listening on port %d", *portFlag))
+	http.ListenAndServe(fmt.Sprintf(":%d", *portFlag), router)
 }
 
 /**
@@ -88,10 +92,9 @@ func (store *ForwardStore) addRecent(f *Forward) {
 		store.Recents = append(store.Recents[:index], store.Recents[index+1:]...)
 	}
 
-	if len(store.Recents) > store.MaxRecents {
-		store.Recents = append([]*Forward{f}, store.Recents[:store.MaxRecents]...)
+	if len(store.Recents) >= store.MaxRecents {
+		store.Recents = append([]*Forward{f}, store.Recents[:store.MaxRecents-1]...)
 	} else {
-
 		store.Recents = append([]*Forward{f}, store.Recents...)
 	}
 }

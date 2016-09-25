@@ -1,4 +1,5 @@
 all:
+	gulp
 	rice embed-go
 	go install github.com/ssddanbrown/forwarder
 

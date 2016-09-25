@@ -29,7 +29,14 @@ $button-border-radius: 3px;
   cursor: pointer;
   transition: all ease-in-out 80ms;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  i {
+  position: relative;
+  &.icon {
+    padding-left: $-m + 36px;
+  }
+  svg {
+    position: absolute;
+    top: $-xs - 1px;
+    left: $-m;
     display: inline-block;
     margin-right: $-xs;
   }

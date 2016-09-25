@@ -4,8 +4,13 @@ import (
 	"encoding/json"
 	"github.com/GeertJohan/go.rice"
 	"github.com/gorilla/mux"
+	"html/template"
 	"net/http"
 )
+
+type HTMLContent struct {
+	CSS template.CSS
+}
 
 func registerRoutes(router *mux.Router, store *ForwardStore) {
 	// Serve static files from public folder
@@ -24,17 +29,26 @@ func registerRoutes(router *mux.Router, store *ForwardStore) {
 
 	// Redirect on forwarder access
 	router.HandleFunc("/{uid}", httpForward(store)).Methods("Get")
+	router.HandleFunc("/", httpForward(store)).Methods("Get")
 }
 
 // Simple handler for serving the index.html file
 func httpServeIndex(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "public/index.html")
+	box := rice.MustFindBox("public")
+	html := box.MustString("index.html")
+	css := box.MustString("dist/styles.css")
+	t := template.New("index")
+	t, _ = t.Parse(html)
+	t.Execute(w, &HTMLContent{CSS: template.CSS(css)})
 }
 
 // Enpoint to perform the forward redirect
 func httpForward(store *ForwardStore) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		key := mux.Vars(r)["uid"]
+		if key == "" {
+			key = "0"
+		}
 		forward, _ := store.get(key)
 		http.Redirect(w, r, forward.URL, 302)
 	}

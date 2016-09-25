@@ -16,7 +16,9 @@ function setController($scope, $http, $routeParams, $location, $timeout, $interv
 	if ($routeParams.uid) {
 		$scope.location.uid = $routeParams.uid;
 		$scope.uidSet = true;
+		window.document.getElementById('url-input').focus()
 	} else {
+		window.document.getElementById('uid-input').focus()
 		$scope.uidSet = false;
 	};
 
@@ -48,8 +50,15 @@ function setController($scope, $http, $routeParams, $location, $timeout, $interv
 		$scope.getLocation($scope.location.uid);
 	}
 
+	function checkUrl(location) {
+		if (location.url.indexOf('http') === -1) {
+			location.url = 'http://' + location.url;
+		}
+	}
+
 	$scope.save = function(location) {
 		$scope.statusClass = '';
+		checkUrl(location);
 		$http.post('/api/set', location)
 		.success(function(data) {
 			$scope.status = 'Link Updated';

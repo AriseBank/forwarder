@@ -14,7 +14,7 @@ header {
 	.logo {
 		color: #FFF;
 		font-size: 1.88em;
-		font-weight: 300;
+		font-weight: 400;
 		margin: $-s 0;
 	}
 }
@@ -53,11 +53,11 @@ table.table {
 	pointer-events: none;
 	bottom: -120px;
 	transition: all ease-in-out 180ms;
-	i {
-		color: $positive;
+	svg {
 		position: absolute;
-		top: $-l;
-		font-size: 2em;
+		top: 22px;
+		width: 36px;
+		height: 36px;
 	}
 	p {
 		margin: 0;

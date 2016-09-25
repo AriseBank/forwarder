@@ -7,9 +7,9 @@
 		<h2 ng-show="uidSet" class="dual-header">Set link location</h2>
 		<h4 ng-show="uidSet">Identified by <span class="highlight">{{location.uid}}</span></h4>
 
-		<div ng-if="!uidSet" class="url-form">
+		<div ng-show="!uidSet" class="url-form">
 			<form class="inline" ng-submit="setUid(uidInput)">
-				<input focus ng-model="uidInput" tabindex="1" placeholder="Access name" type="text">
+				<input id="uid-input" ng-model="uidInput" tabindex="1" placeholder="Access name" type="text">
 				<button type="submit" class="button primary">Continue</button>
 			</form>
 		</div>
@@ -19,7 +19,7 @@
 
 <section ng-show="uidSet" class="container text-center url-form">
 	<form ng-submit="save(location)">
-		<input tabindex="1" ng-model="location.url" type="text">
+		<input id="url-input" tabindex="1" ng-model="location.url" type="text">
 		<button type="submit" class="button primary">Save</button>
 	</form>
 	<p class="error" ng-show="error.url">{{error.url}}</p>
@@ -41,13 +41,20 @@
 		</div>
 	</div>
 	<p ng-show="location.expired" class="text-neg text-center">
-		<i class="fa fa-warning"></i> <br>
+		<svg fill="#D35252" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+		    <path d="M0 0h24v24H0z" fill="none"/>
+		    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+		</svg>
+		<br>
 		This link has expired. <br>
 		Press save above to re-enable this link.
 	</p>
 </div>
 
 <div class="notification" ng-class="{showing: statusClass}">
-	<i class="fa fa-check-circle"></i>
+	<svg fill="#5aab4b" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+	    <path d="M0 0h24v24H0z" fill="none"/>
+	    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+	</svg>
 	<p>{{status}}</p>
 </div>

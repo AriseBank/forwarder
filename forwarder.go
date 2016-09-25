@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 	"time"
 )
@@ -37,7 +38,7 @@ func main() {
 
 	// Start server
 	fmt.Println(fmt.Sprintf("Listening on port %d", *portFlag))
-	http.ListenAndServe(fmt.Sprintf(":%d", *portFlag), router)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *portFlag), router))
 }
 
 /**

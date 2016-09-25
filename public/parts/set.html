@@ -7,7 +7,7 @@
 		<h2 ng-show="uidSet" class="dual-header">Set link location</h2>
 		<h4 ng-show="uidSet">Identified by <span class="highlight">{{location.uid}}</span></h4>
 
-		<div ng-if="!uidSet">
+		<div ng-if="!uidSet" class="url-form">
 			<form class="inline" ng-submit="setUid(uidInput)">
 				<input focus ng-model="uidInput" tabindex="1" placeholder="Access name" type="text">
 				<button type="submit" class="button primary">Continue</button>
@@ -23,9 +23,29 @@
 		<button type="submit" class="button primary">Save</button>
 	</form>
 	<p class="error" ng-show="error.url">{{error.url}}</p>
-	<p>URL can be accessed at <a target="_self" href="/{{location.uid}}">{{host + '/' + location.uid}}</a></p>
+	<p>
+		URL can be accessed at <a target="_self" href="/{{location.uid}}">{{host + '/' + location.uid}}</a>
+		<br>
+		<span class="text-muted">
+			The link will expire after 1 hour
+		</span>
+	</p>
+
+
 </section>
 
+<div class="container">
+	<div class="lifebar" ng-if="location.life">
+		<div class="track">
+			<div class="life" ng-class="{expired: location.expired}" ng-style="{width: location.lifePercent}"></div>
+		</div>
+	</div>
+	<p ng-show="location.expired" class="text-neg text-center">
+		<i class="fa fa-warning"></i> <br>
+		This link has expired. <br>
+		Press save above to re-enable this link.
+	</p>
+</div>
 
 <div class="notification" ng-class="{showing: statusClass}">
 	<i class="fa fa-check-circle"></i>

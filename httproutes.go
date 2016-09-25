@@ -72,7 +72,7 @@ func httpSetForward(store *ForwardStore) func(w http.ResponseWriter, r *http.Req
 			return
 		}
 
-		store.set(f)
-		json.NewEncoder(w).Encode(f)
+		newForward := store.set(f)
+		json.NewEncoder(w).Encode(newForward)
 	}
 }

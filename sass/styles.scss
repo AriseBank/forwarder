@@ -69,3 +69,26 @@ table.table {
 		bottom: 20px;
 	}
 }
+
+.lifebar {
+	max-width: 800px;
+	margin: $-l auto;
+	.track, .life {
+		border-radius: 12px;
+	}
+	.track {
+		background-color: #BBB;
+		padding: 2px;
+		position: relative;
+		height: 12px;
+	}
+	.life {
+		background-color: $primary;
+		height: 8px;
+		width: 0%;
+		transition: width linear 1980ms, background-color ease-in 220ms;
+		&.expired {
+			background-color: $negative;
+		}
+	}
+}

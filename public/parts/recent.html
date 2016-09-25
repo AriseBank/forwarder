@@ -23,9 +23,16 @@
 		<tbody>
 			<tr ng-repeat="location in locations">
 				<td>{{location.uid}}</td>
-				<td><div class="overflow">
-					{{location.url}}
-				</div></td>
+				<td>
+					<div class="overflow">
+						{{location.url}}
+					</div>
+					<div class="lifebar" ng-if="location.life">
+						<div class="track">
+							<div class="life" ng-class="{expired: location.expired}" ng-style="{width: location.lifePercent}"></div>
+						</div>
+					</div>
+				</td>
 				<td>
 					<a ng-href="/set/{{location.uid}}" class="button">
 						<i class="fa fa-pencil"></i>Edit URL

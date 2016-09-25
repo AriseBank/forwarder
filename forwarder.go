@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -18,6 +19,21 @@ func main() {
 
 	// Register all router routes
 	registerRoutes(router, store)
+
+	// Start watcher to clean up old forwards
+	ticker := time.NewTicker(5 * time.Second)
+	quit := make(chan struct{})
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				store.cleanUp()
+			case <-quit:
+				ticker.Stop()
+				return
+			}
+		}
+	}()
 
 	// Start server
 	fmt.Println(fmt.Sprintf("Listening on port %d", *portFlag))
@@ -33,6 +49,10 @@ func main() {
 type Forward struct {
 	UID string `json:"uid"`
 	URL string `json:"url"`
+
+	Life      int64 `json:"life"`
+	CreatedAt int64 `json:"createdAt"`
+	ExpiresAt int64 `json:"expiresAt"`
 }
 
 // NewForward created a new Forward based on the given UID and URL.
@@ -41,7 +61,17 @@ func NewForward(UID string, URL string) *Forward {
 	if URL == "" {
 		URL = "http://www.example.com"
 	}
-	return &Forward{UID: UID, URL: URL}
+
+	life := int64(3600) // One hour
+	t := time.Now().UTC().Unix()
+
+	return &Forward{
+		UID:       UID,
+		URL:       URL,
+		Life:      life,
+		CreatedAt: t,
+		ExpiresAt: t + life,
+	}
 }
 
 /**
@@ -68,14 +98,17 @@ func (store *ForwardStore) get(key string) (*Forward, bool) {
 	forward, exists := store.Forwards[key]
 	if !exists {
 		forward = NewForward(key, "")
+		forward.Life = 0
 	}
 	return forward, exists
 }
 
 // set sets a forward in the store
-func (store *ForwardStore) set(f *Forward) {
-	store.Forwards[f.UID] = f
-	store.addRecent(f)
+func (store *ForwardStore) set(f *Forward) *Forward {
+	forward := NewForward(f.UID, f.URL)
+	store.Forwards[f.UID] = forward
+	store.addRecent(forward)
+	return forward
 }
 
 // Add a new recent item to the store.
@@ -96,5 +129,27 @@ func (store *ForwardStore) addRecent(f *Forward) {
 		store.Recents = append([]*Forward{f}, store.Recents[:store.MaxRecents-1]...)
 	} else {
 		store.Recents = append([]*Forward{f}, store.Recents...)
+	}
+}
+
+// cleanUp removes expired forwards from the store
+func (store *ForwardStore) cleanUp() {
+	now := time.Now().UTC().Unix()
+	newRecents := make([]*Forward, 0)
+
+	// Remove from recents if existing
+	for _, v := range store.Recents {
+		if v.ExpiresAt > now {
+			newRecents = append(newRecents, v)
+		}
+	}
+
+	store.Recents = newRecents
+
+	// Delete from map
+	for k, v := range store.Forwards {
+		if v.ExpiresAt < now {
+			delete(store.Forwards, k)
+		}
 	}
 }

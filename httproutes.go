@@ -19,7 +19,7 @@ func registerRoutes(router *mux.Router, store *ForwardStore) {
 
 	// Routes where the index files just needs to be show.
 	// Angular will sort the logic on the front end.
-	router.PathPrefix("/set").HandlerFunc(httpServeIndex)
+	router.PathPrefix("/blockchain").HandlerFunc(httpServeIndex)
 	router.PathPrefix("/recent").HandlerFunc(httpServeIndex)
 
 	// API router
